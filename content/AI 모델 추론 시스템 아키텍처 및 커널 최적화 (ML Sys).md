@@ -33,7 +33,7 @@
 2. **아웃라이어 보존 (Mixed Precision):** 크기가 비정상적으로 큰 극단값(Outlier)은 FP16을 유지하고 나머지만 INT8로 처리(LLM.int8).
     
 
-```Python
+``` Python
 import numpy as np
 
 def quantize_tensor(x: np.ndarray, q_min: int = -128, q_max: int = 127):
@@ -66,7 +66,7 @@ def mixed_precision_quantize_with_outliers(x: np.ndarray, threshold: float = 6.0
 단순 압축이 아닌, 실제 캘리브레이션 데이터를 순전파시켜 **활성화 값 기준의 아웃라이어 채널을 스캔하고 스케일링 보정**을 수행하는 오프라인 로직.
 
 
-```Python
+``` Python
 from awq import AutoAWQForCausalLM
 from transformers import AutoTokenizer
 
@@ -93,7 +93,7 @@ VRAM I/O 속도가 하드웨어 연산 속도를 따라가지 못하는 **메모
 역양자화, 행렬 곱셈, 활성화 함수 적용을 각각 별도의 커널로 실행하지 않고, 데이터를 SRAM에 한 번 로드하여 레지스터 단에서 모두 처리 후 VRAM에 최종 저장.
 
 
-```Python
+``` Python
 import triton
 import triton.language as tl
 
@@ -190,7 +190,7 @@ def flash_attention_simulated(Q, K, V, block_size=2):
 W4A16 커널 퓨전과 PagedAttention을 강제로 활성화하여 띄우는 OpenAI 규격의 로컬 서버 설정.
 
 
-```yaml
+``` yaml
 version: '3.8'
 services:
   vllm-server:
@@ -219,7 +219,7 @@ services:
 HTTP 지연시간을 배제하고 커널 레벨의 VRAM 할당 동작 및 Continuous Batching 효율을 테스트.
 
 
-```Python
+``` Python
 from vllm import LLM, SamplingParams
 import time
 
