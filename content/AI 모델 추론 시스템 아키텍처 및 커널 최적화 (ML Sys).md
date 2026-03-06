@@ -33,7 +33,8 @@
 2. **아웃라이어 보존 (Mixed Precision):** 크기가 비정상적으로 큰 극단값(Outlier)은 FP16을 유지하고 나머지만 INT8로 처리(LLM.int8).
     
 
-``` Python
+
+``` python
 import numpy as np
 
 def quantize_tensor(x: np.ndarray, q_min: int = -128, q_max: int = 127):
@@ -66,7 +67,7 @@ def mixed_precision_quantize_with_outliers(x: np.ndarray, threshold: float = 6.0
 단순 압축이 아닌, 실제 캘리브레이션 데이터를 순전파시켜 **활성화 값 기준의 아웃라이어 채널을 스캔하고 스케일링 보정**을 수행하는 오프라인 로직.
 
 
-``` Python
+``` python
 from awq import AutoAWQForCausalLM
 from transformers import AutoTokenizer
 
@@ -93,7 +94,7 @@ VRAM I/O 속도가 하드웨어 연산 속도를 따라가지 못하는 **메모
 역양자화, 행렬 곱셈, 활성화 함수 적용을 각각 별도의 커널로 실행하지 않고, 데이터를 SRAM에 한 번 로드하여 레지스터 단에서 모두 처리 후 VRAM에 최종 저장.
 
 
-``` Python
+``` python
 import triton
 import triton.language as tl
 
@@ -130,6 +131,7 @@ def fused_dequant_matmul_relu_kernel(
 ### 4.1. FlashAttention-1: Tiling과 Online Softmax
 
 $O(N^2)$ 크기의 어텐션 행렬을 VRAM에 기록하지 않고, 블록 단위로 쪼개어(Tiling) SRAM에서 계산. Softmax 연산의 수치적 한계를 해결하기 위해 로컬 최댓값($m$)과 지수합($l$)을 업데이트하며 글로벌 스케일을 실시간으로 보정하는 **Online Softmax** 적용.
+
 
 ``` python
 import numpy as np
@@ -219,7 +221,7 @@ services:
 HTTP 지연시간을 배제하고 커널 레벨의 VRAM 할당 동작 및 Continuous Batching 효율을 테스트.
 
 
-``` Python
+``` python
 from vllm import LLM, SamplingParams
 import time
 
