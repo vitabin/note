@@ -1,4 +1,4 @@
 
-[[automatic-commit-and-sync-test]]
+[[AI 모델 추론 시스템 아키텍처 및 커널 최적화 (ML Sys)]]
 [[push-test]]
 
