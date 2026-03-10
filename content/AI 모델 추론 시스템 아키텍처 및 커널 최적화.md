@@ -246,10 +246,10 @@ print(f"Raw Throughput: { (256 * len(prompts)) / total_time :.2f} tokens/s")
 
 ## 🗂️ Categories & Tags
 
-- **#AI**
-- #**Architecture**
-- **#Machine_Learning_Systems_MLSys**
-- **#Quantization**
-- **#CUDA_Optimization**
-- **#Memory_Management**
-- **#vLLM**
+- #AI
+- #Architecture
+- #Machine_Learning_Systems_MLSys
+- #Quantization
+- #CUDA_Optimization
+- #Memory_Management
+- #vLLM
