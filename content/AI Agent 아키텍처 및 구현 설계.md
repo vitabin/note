@@ -265,7 +265,3 @@ if __name__ == "__main__":
 - #Architecture 
 	
 - #LangGraph
-
-## 📊 Graph
-
-- [[AI 모델 추론 시스템 아키텍처 및 커널 최적화]]
